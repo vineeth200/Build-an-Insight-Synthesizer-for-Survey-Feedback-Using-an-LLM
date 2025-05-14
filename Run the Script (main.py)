@@ -1,0 +1,12 @@
+from prompts import generate_prompt
+from utils import preprocess_responses, call_llm
+import json
+
+with open("data/survey_responses.json") as f:
+    raw = json.load(f)
+
+responses = preprocess_responses(raw)
+prompt = generate_prompt(responses)
+output = call_llm(prompt)
+
+print(json.dumps(output, indent=2))
