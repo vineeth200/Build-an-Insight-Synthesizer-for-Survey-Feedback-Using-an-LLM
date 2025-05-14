@@ -1,0 +1,19 @@
+def preprocess_responses(responses):
+    return list(set(r.strip() for r in responses if r.strip()))
+def generate_prompt(responses):
+    joined = "\n".join(f"- {r}" for r in responses)
+    return f"""You are an Insight Synthesizer AI...
+
+Survey responses:
+{joined}
+
+Return JSON format as:
+[
+{{
+  "theme": "...",
+  "quotes": ["...", "..."],
+  "sentiment": "..."
+}},
+...
+]
+"""
